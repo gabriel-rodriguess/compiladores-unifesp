@@ -1,0 +1,21 @@
+'Implementação do scanner (Analisador Léxico) para o compilador C-.
+
+Passos sugeridos:
+1- definir os tokens p/ a linguagem C-
+2- definir as expressões regulares para cada token
+3- Preparar a entrada para o flex. chamar de scanner.l
+4- Para testar o seu scanner, fazer a análise léxica do arquivo sort como resultado gerar um arquivos saida.txt,
+	mostrando neste arquivo a subsituição dos lexemas por tokens.
+
+	Sort.txt -> Scanner -> Saída.txt
+5- Submeter no Moodle até 26/09
+
+Dica para execução dos teste 
+Criar um arquivo Script.sh no linux
+#!/bin/bash
+flex scanner.l
+gcc -o exec lex.yy.c -lfl
+
+para executar o script, digitar na linha de comando:
+chmod +x script.sh
+./script.sh
