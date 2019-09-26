@@ -5,13 +5,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int line_count = 1;
+int is_comment = 0;
+
 enum lex{
   ELSE, IF, INT, RETURN,
-  VOID, WHILE, ASSIGN, EQ, NUM,
-  LT, GT, LTE, GTE, NE, ID, COMMA,
-  LBRACKET, RBRACKET, LKEYS, END,
+  VOID, WHILE, ASSIGN, EQ, NUM, NEWLINE,
+  LT, GT, LTE, GTE, NE, ID, COMMA, WHITESPACE,
+  LBRACKET, RBRACKET, LKEYS, END, INVALID,
   RKEYS, PLUS, MINUS, TIMES, ICOMMENT,
-  OVER, LPAREN, RPAREN, SEMI, FCOMMENT
+  OVER, LPAREN, RPAREN, SEMI, FCOMMENT, DOT
 };
 
 void printToken(FILE *out, char stringToken[]){
@@ -49,7 +52,9 @@ void identifyToken(FILE *out, int token){
     case SEMI: printToken(out, "SEMI"); break;
     case ICOMMENT: printToken(out, "ICOMMENT"); break;
     case FCOMMENT: printToken(out, "FCOMMENT"); break;
-    default: fprintf(out, "%s", yytext);
+    case NEWLINE: printToken(out, "\n"); break;
+    case WHITESPACE: printToken(out, " "); break;
+    default: printf("lex error: %s | line: %d\n", yytext, line_count);
   }
 }
 
@@ -62,6 +67,9 @@ digit       [0-9]
 number      {digit}+
 letter      [a-zA-Z]
 identifier  {letter}+
+newline     \n
+whitespace  [ \t]+
+invalid     {digit}+{letter}[a-zA-Z0-9]+
 
 %%
 
@@ -92,8 +100,12 @@ identifier  {letter}+
 ")"             {return RPAREN;}
 ";"             {return SEMI;}
 ","		          {return COMMA;}
+"."             {return DOT;}
 {number}        {return NUM;}
 {identifier}    {return ID;}
+{newline}       {line_count++; return NEWLINE;}
+{whitespace}    {return WHITESPACE;}
+{invalid}        {return INVALID;}
 <<EOF>>         {return END;}
 
 %%
@@ -106,12 +118,12 @@ int main(int argc, char *argv[]){
   int token;
 
   if(argc > 2){
-    printf("too may arguments");
+    printf("too many arguments\n");
     return -1;
   }else if(argc == 2){
     if((f_in = fopen(argv[1], "r"))){
       yyin = f_in;
-    } else{ 
+    } else{
       perror(argv[0]);
       return -1;
     }
@@ -121,7 +133,9 @@ int main(int argc, char *argv[]){
   yyout = f_out;
 
   while((token = yylex()) != END){
-    identifyToken(yyout, token);
+    if (token == ICOMMENT) is_comment = 1;
+    if(!is_comment) identifyToken(yyout, token);
+    if (token == FCOMMENT) is_comment = 0;
   }
 
   return 0;
