@@ -1,3 +1,4 @@
+Atividade 1 -
 'Implementação do scanner (Analisador Léxico) para o compilador C-.
 
 Passos sugeridos:
@@ -19,3 +20,13 @@ gcc -o exec lex.yy.c -lfl
 para executar o script, digitar na linha de comando:
 chmod +x script.sh
 ./script.sh
+
+Atividade 2 -
+
+i) Preparar o analisador léxico (entrada do Flex) para a GLC de expressões aritméticas (em EBNF - Slides Aula 11);
+ii) Escrever o parser descendente recursivo (exemplo visto na última aula) para a GLC em EBNF de expressões aritméticas;
+iii) Integrar o parser com o analisador léxico (pode deixar tudo dentro do arquivo .l(entrada do flex));
+iv) Testar com as seguintes entradas:
+	20 + 5 * 10;
+	(10 - 4) * (40 - 10);
+	5 + + 10;
