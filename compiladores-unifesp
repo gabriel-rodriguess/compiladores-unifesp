@@ -30,3 +30,9 @@ iv) Testar com as seguintes entradas:
 	20 + 5 * 10;
 	(10 - 4) * (40 - 10);
 	5 + + 10;
+
+Atividade dia 31/10
+- Preparar uma entrada para o Bison(arquivo.y) para gerar um parser para a linguagem c-. Usar a GLC já pronta para o c- (vide 
+no arquivo de descrição do projeto, disponível no moodle)
+- usar no arquivo.l já criado para o analisador léxico de c-.
+-lembre-se que os arquivos de .y e .l trabalham de forma integrada.
