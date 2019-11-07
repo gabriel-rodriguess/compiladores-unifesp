@@ -36,3 +36,8 @@ Atividade dia 31/10
 no arquivo de descrição do projeto, disponível no moodle)
 - usar no arquivo.l já criado para o analisador léxico de c-.
 -lembre-se que os arquivos de .y e .l trabalham de forma integrada.
+
+Atividade dia 7/11
+- Ver no moodle codigo completo do compilador Tiny, com e sem YACC BISON.
+- Terminar implementação do Parser (sem geração da árvore sintática).
+- Incluir no Parser a criação da árvore sintática (vide exemplo tiny.y no moodle)
