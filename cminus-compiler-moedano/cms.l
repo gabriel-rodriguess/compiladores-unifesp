@@ -2,7 +2,7 @@
 /*                                                  */
 /* Analisador Léxico para C--                       */
 /*                                                  */
-/* Exemplo de analisador                            */
+/* Thauany Moedano                                  */
 /****************************************************/
 
 %{
@@ -87,3 +87,4 @@ TokenType getToken(void)
       }
       return currentToken;
 }
+
